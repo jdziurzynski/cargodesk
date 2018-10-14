@@ -1,0 +1,27 @@
+<form action='{% url 'newload' %}' method='post'>
+{% csrf_token %}
+    <label for='loading_place'>Loading place:</label>
+    <br>
+    <input type='text' name='loading_place' id='loading_place'/>
+  <br>
+    <label for='unloading_place'>Unloading place:</label>
+    <br>
+    <input type='text' name='unloading_place' id='unloading_place'/>
+  <br><br>
+    <label for='weight'>Weight </label>
+    <input type='number' name='weight' id='weight'>
+  <br>
+  <!--<label for='truck_type'>Truck type </label>
+    <select>
+      <option value="TAUTLINER">Tautliner</option>
+      <option value="FRIGO">Frigo</option>
+      <option value="TANK">Tank</option>
+    </select>-->
+  <br><br>
+    <label for='info'>Info </label><br>
+    <textarea type='text' name='info' id='info'></textarea>
+  <br><br><br>
+  <input type='submit' value='Submit'/>
+  <a href='/cargos'>Go back</a> 
+
+</form>

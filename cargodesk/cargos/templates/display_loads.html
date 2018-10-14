@@ -1,0 +1,6 @@
+<a href = 'newload/'>Add new load</a>
+<ul>
+  {% for load in loads %}
+    <li>{{load.loading_place}} -> {{load.unloading_place}} {{load.weight}} {{info}}</li>
+  {% endfor %}
+</ul>
