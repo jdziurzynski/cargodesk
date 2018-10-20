@@ -1,0 +1,117 @@
+<html>
+  <head>
+    {% load static %}
+    <link rel='stylesheet' href= "{% static 'cargos/style.css' %}">
+    <title>CargoDesk</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <style>
+
+
+    #top-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #95918A;
+      height: 40px;
+      text-align: center;
+      padding: 5px;
+      font-size: 22;
+      font-family: 'Orbitron', sans-serif;
+      color: #FFB600;
+      z-index: 999;
+
+    }
+
+    .loads_container {
+      width: 81%;
+      margin-top: 47px;
+    }
+
+    .load_block{
+      display: flex;
+      justify-content: space-around;
+      border: solid 1px;
+      margin: 5px;
+      padding: 3px;
+      border-radius: 2px;
+      border-color: #999492;
+    }
+
+    .load_block:hover{
+      background-color: #FECB4F;
+      transform: scale(1.01);
+    }
+
+    #load_maker{
+      position: absolute;
+      height: 100%;
+      right: 0px;
+      top: 40px;
+      width: 250px;
+      background: #E8E6E2;
+      display: flex;
+      justify-content: center;
+
+    }
+
+    .submit_button{
+      text-align: center;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <div id='top-bar'>
+      <span><strong>CargoDesk</strong></span>
+    </div>
+
+    <div class='loads_container'>
+      {% for load in loads %}
+      <div class='load_block'>
+        <div>{{load.loading_place}}</div>
+        <div>{{load.unloading_place}}</div>
+        <div>{{load.weight}} t.</div>
+        <div>{{load.price}}</div>
+        <div>{{load.info}}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+    <div id="load_maker">
+      <form action='{% url 'newload' %}' method='post'>
+      {% csrf_token %}
+          <label for='loading_place'>Loading place:</label><br>
+          <input type='text' name='loading_place' required>
+        <br>
+          <label for='unloading_place'>Unloading place:</label><br>
+          <input type='text' name='unloading_place' required>
+        <br><br>
+          <label for='weight'>Weight </label><br>
+          <input type='number' name='weight' maxlength='3' required>
+        <br>
+          <label for='price'>Price</label><br>
+          <input type='number' name='price' required>
+          <!--
+        <label for='truck_type'>Truck type </label>
+          <select>
+            <option name='truck_type' value="TAUTLINER">Tautliner</option>
+            <option name='truck_type' value="FRIGO">Frigo</option>
+            <option name='truck_type' value="TANK">Tank</option>
+          </select>-->
+
+        <br><br>
+          <label for='info'>Info </label><br>
+          <textarea type='text' name='info'></textarea>
+        <br><br><br>
+        <div class='submit_button'><input type='submit' value='Add load'/></div>
+
+      </form>
+    </div>
+  </body>
+
+</html>
