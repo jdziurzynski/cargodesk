@@ -81,7 +81,15 @@
     </div>
 
 
+    <div id="load_maker">
+    <form action='{% url 'newload' %}' method="post">
+    {% csrf_token %}
+      {{ x }}
+    <input type="submit" value="Add load">
+    </form>
+  </div>
 
+<!--
     <div id="load_maker">
       <form action='{% url 'newload' %}' method='post'>
       {% csrf_token %}
@@ -96,13 +104,13 @@
         <br>
           <label for='price'>Price</label><br>
           <input type='number' name='price' required>
-          <!--
+          <!-
         <label for='truck_type'>Truck type </label>
           <select>
             <option name='truck_type' value="TAUTLINER">Tautliner</option>
             <option name='truck_type' value="FRIGO">Frigo</option>
             <option name='truck_type' value="TANK">Tank</option>
-          </select>-->
+          </select>  ->
 
         <br><br>
           <label for='info'>Info </label><br>
@@ -112,6 +120,7 @@
 
       </form>
     </div>
+  -->
   </body>
 
 </html>
