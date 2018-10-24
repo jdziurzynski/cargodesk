@@ -1,37 +1,34 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Shipment
-from .forms import NewLoad
+from .forms import FormNewLoad
 
 
-
-'''def new_load(request):
-    if(request.method== 'POST'):
-        loading_place = request.POST['loading_place']
-        unloading_place = request.POST['unloading_place']
-        weight = request.POST['weight']
-        price = request.POST['price']
-        info = request.POST['info']
-
-
-        shipment = Shipment(loading_place=loading_place, unloading_place=unloading_place, weight=weight, info=info, price=price)
-        shipment.save()
-
-        return redirect('/cargos')
-    else:
-        return render(request, 'one_desk.html')'''
 
 def new_load(request):
-    if (request.metod == 'POST'):
-        x = NewLoad(request.POST)
-    else:
-        x = NewLoad()
+    creat_load = FormNewLoad(request.POST)
+    if creat_load.is_valid():
+        n_load = creat_load.save()
 
-    return render(request, 'one_desk.html', {'x': x})
+    context={
+        'creat_load': creat_load,
+    }
+
+    return redirect('/cargos')
+
+
 
 def display_loads(request):
     loads = Shipment.objects.all()
+    creat_load = FormNewLoad()
     context = {
-        'loads':loads
+        'loads':loads,
+        'creat_load':creat_load
     }
     return render(request, 'one_desk.html', context)
+
+
+def delete_load(request, pk):
+    load = get_object_or_404(Shipment, pk=pk).delete()
+
+    return redirect('/cargos')

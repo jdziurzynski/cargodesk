@@ -4,11 +4,29 @@
     <link rel='stylesheet' href= "{% static 'cargos/style.css' %}">
     <title>CargoDesk</title>
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
 
+    .date{
+      width: 90px;
+    }
 
+    select{
+      height: 26px;
+    }
+
+
+    #delbutton{
+      color: black;
+    }
+    #delbutton:hover{
+      color: red;
+    }
+
+    .weight_class{
+      color: : green;
+      width: 35px;
+    }
     #top-bar {
       position: fixed;
       top: 0;
@@ -25,7 +43,7 @@
     }
 
     .loads_container {
-      width: 81%;
+      width: 83%;
       margin-top: 47px;
     }
 
@@ -57,8 +75,20 @@
     }
 
     .submit_button{
-      text-align: center;
+
     }
+
+    .price{
+      display: inline-block;
+      width: 60px;
+    }
+
+    .weight{
+      display:
+      width: 30px;
+    }
+
+
 
     </style>
   </head>
@@ -74,8 +104,11 @@
         <div>{{load.loading_place}}</div>
         <div>{{load.unloading_place}}</div>
         <div>{{load.weight}} t.</div>
-        <div>{{load.price}}</div>
+        <div>{{load.price}} {{ load.currency}}</div>
+        <div>{{ load.truck_type }}</div>
+        <div>{{ load.date  }}</div>
         <div>{{load.info}}</div>
+        <a href="delete/{{ load.pk }}"><span id='delbutton' class="glyphicon glyphicon-trash"></span></a>
       </div>
       {% endfor %}
     </div>
@@ -84,43 +117,18 @@
     <div id="load_maker">
     <form action='{% url 'newload' %}' method="post">
     {% csrf_token %}
-      {{ x }}
-    <input type="submit" value="Add load">
+      <div><label for='{{creat_load.loading_place.label_tag}}'>Loading place:</label><br>{{ creat_load.loading_place }}</div>
+      <div><label for='{{creat_load.unloading_place.label_tag}}'>Unloading place:</label><br>{{ creat_load.unloading_place }}</div>
+      <div class='weightprice'><div><label for='{{creat_load.weight.label_tag}}'>Weight:</label><br>{{ creat_load.weight }}{{ creat_load.truck_type }}</div>
+      <div><label for='{{creat_load.price.label_tag}}'>Price:</label><br>{{ creat_load.price }}{{ creat_load.currency }}</div></div>
+      <div>{{ creat_load.load_date_from }}{{ creat_load.load_date_to }}</div>
+      <div>{{ creat_load.unload_date_from }}{{ creat_load.unload_date_to }}</div>
+      <div><label for='{{creat_load.info.label_tag}}'>Info:</label><br>{{ creat_load.info }}</div>
+      <br><br>
+    <input class="submit_button btn-success" type="submit" value="Add load">
     </form>
   </div>
 
-<!--
-    <div id="load_maker">
-      <form action='{% url 'newload' %}' method='post'>
-      {% csrf_token %}
-          <label for='loading_place'>Loading place:</label><br>
-          <input type='text' name='loading_place' required>
-        <br>
-          <label for='unloading_place'>Unloading place:</label><br>
-          <input type='text' name='unloading_place' required>
-        <br><br>
-          <label for='weight'>Weight </label><br>
-          <input type='number' name='weight' maxlength='3' required>
-        <br>
-          <label for='price'>Price</label><br>
-          <input type='number' name='price' required>
-          <!-
-        <label for='truck_type'>Truck type </label>
-          <select>
-            <option name='truck_type' value="TAUTLINER">Tautliner</option>
-            <option name='truck_type' value="FRIGO">Frigo</option>
-            <option name='truck_type' value="TANK">Tank</option>
-          </select>  ->
-
-        <br><br>
-          <label for='info'>Info </label><br>
-          <textarea type='text' name='info'></textarea>
-        <br><br><br>
-        <div class='submit_button'><input type='submit' value='Add load'/></div>
-
-      </form>
-    </div>
-  -->
   </body>
 
 </html>
