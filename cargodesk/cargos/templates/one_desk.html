@@ -16,6 +16,7 @@
     }
 
 
+
     #delbutton{
       color: black;
     }
@@ -45,11 +46,12 @@
     .loads_container {
       width: 83%;
       margin-top: 47px;
+      margin-left: 10px;
     }
 
     .load_block{
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       border: solid 1px;
       margin: 5px;
       padding: 3px;
@@ -58,7 +60,7 @@
     }
 
     .load_block:hover{
-      background-color: #FECB4F;
+      background-color: #fcc780;
       transform: scale(1.01);
     }
 
@@ -75,6 +77,7 @@
     }
 
     .submit_button{
+      width: 100%
 
     }
 
@@ -87,7 +90,11 @@
       display:
       width: 30px;
     }
-
+    .fromwhere{
+      display: flex;
+      justify-content: space-between;
+      width: 370px;
+    }
 
 
     </style>
@@ -101,14 +108,17 @@
     <div class='loads_container'>
       {% for load in loads %}
       <div class='load_block'>
+        <div class='fromwhere'>
         <div>{{load.loading_place}}</div>
         <div>{{load.unloading_place}}</div>
+      </div>
         <div>{{load.weight}} t.</div>
         <div>{{load.price}} {{ load.currency}}</div>
         <div>{{ load.truck_type }}</div>
-        <div>{{ load.date  }}</div>
+        <div>{{ load.load_date_from|date:"d.m - "  }}{{ load.load_date_to|date:" d.m"}} &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp;&nbsp;
+              {{ load.unload_date_from|date:"d.m -"  }}{{ load.unload_date_to|date:" d.m"}}</div>
         <div>{{load.info}}</div>
-        <a href="delete/{{ load.pk }}"><span id='delbutton' class="glyphicon glyphicon-trash"></span></a>
+        <a href="delete/{{ load.pk }}" onclick="return confirm('Przemyśl to');"><span id='delbutton' class="glyphicon glyphicon-trash"></span></a>
       </div>
       {% endfor %}
     </div>
@@ -120,11 +130,11 @@
       <div><label for='{{creat_load.loading_place.label_tag}}'>Loading place:</label><br>{{ creat_load.loading_place }}</div>
       <div><label for='{{creat_load.unloading_place.label_tag}}'>Unloading place:</label><br>{{ creat_load.unloading_place }}</div>
       <div class='weightprice'><div><label for='{{creat_load.weight.label_tag}}'>Weight:</label><br>{{ creat_load.weight }}{{ creat_load.truck_type }}</div>
-      <div><label for='{{creat_load.price.label_tag}}'>Price:</label><br>{{ creat_load.price }}{{ creat_load.currency }}</div></div>
-      <div>{{ creat_load.load_date_from }}{{ creat_load.load_date_to }}</div>
-      <div>{{ creat_load.unload_date_from }}{{ creat_load.unload_date_to }}</div>
+      <div><label for='{{creat_load.price.label_tag}}'>Price:</label><br>{{ creat_load.price }}{{ creat_load.currency }}</div></div><br><br>
+      <div><label for='{{creat_load.load_date_from.label_tag}}'>Loading dates:</label><br>{{ creat_load.load_date_from }}{{ creat_load.load_date_to }}</div>
+      <div><label for='{{creat_load.uload_date_from.label_tag}}'>Unloading dates:</label><br>{{ creat_load.unload_date_from }}{{ creat_load.unload_date_to }}</div>
       <div><label for='{{creat_load.info.label_tag}}'>Info:</label><br>{{ creat_load.info }}</div>
-      <br><br>
+      <br><br><br>
     <input class="submit_button btn-success" type="submit" value="Add load">
     </form>
   </div>

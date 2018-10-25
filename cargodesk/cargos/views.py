@@ -19,10 +19,10 @@ def new_load(request):
 
 
 def display_loads(request):
-    loads = Shipment.objects.all()
+    loads = Shipment.objects.all().order_by('unload_date_to')
     creat_load = FormNewLoad()
     context = {
-        'loads':loads,
+        'loads': loads,
         'creat_load':creat_load
     }
     return render(request, 'one_desk.html', context)
