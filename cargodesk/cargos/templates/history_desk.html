@@ -1,0 +1,37 @@
+<html>
+  <head>
+    {% load static %}
+    <link rel='stylesheet' href= "{% static 'css/style.css' %}">
+    <title>CargoDesk</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+  <body>
+
+    <div class='top-bar'>
+      <span><strong>CargoDesk</strong></span>
+    </div>
+    <div class='navi'>
+      <a href= {% url 'display' %} role='button'><button class='link'>Main</button></a>
+    </div>
+
+    <div class='loads_container'>
+      {% for load in loads %}
+      <div class='load_block'>
+        <div class='fromwhere'>
+        <div>{{load.loading_place}}</div>
+        <div>{{load.unloading_place}}</div>
+      </div>
+        <div>{{load.weight}} t.</div>
+        <div>{{load.price}} {{ load.currency}}</div>
+        <div>{{ load.truck_type }}</div>
+        <div>{{ load.load_date_from|date:"d.m - "  }}{{ load.load_date_to|date:" d.m"}} &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp;&nbsp;
+              {{ load.unload_date_from|date:"d.m -"  }}{{ load.unload_date_to|date:" d.m"}}</div>
+        <div>{{load.info}}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+  </body>
+</html>

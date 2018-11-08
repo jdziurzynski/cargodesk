@@ -19,7 +19,8 @@ truck_type_choices = (
 class FormNewLoad(ModelForm):
     class Meta:
         model = Shipment
-        fields =  '__all__'  #'['loading_place', 'unloading_place', 'weight', 'price', 'info', 'truck_type', 'currency', 'date']'
+        #fields =  '__all__'  #'['loading_place', 'unloading_place', 'weight', 'price', 'info', 'truck_type', 'currency', 'date']'
+        exclude = ("date_close", "status", "closed_date")
         widgets={
             'info': Textarea(attrs={'cols':20, 'rows': 3}),
             'date': DateInput()

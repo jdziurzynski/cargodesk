@@ -1,25 +1,26 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Shipment
+from .models import Shipment, active, closed
 from .forms import FormNewLoad
+from datetime import datetime
 
 
 
 def new_load(request):
     creat_load = FormNewLoad(request.POST)
+    print("before")
     if creat_load.is_valid():
         n_load = creat_load.save()
 
     context={
         'creat_load': creat_load,
     }
-
     return redirect('/cargos')
 
 
 
 def display_loads(request):
-    loads = Shipment.objects.all().order_by('unload_date_to')
+    loads = Shipment.objects.all().order_by('unload_date_to').filter(status=active)
     creat_load = FormNewLoad()
     context = {
         'loads': loads,
@@ -29,6 +30,17 @@ def display_loads(request):
 
 
 def delete_load(request, pk):
-    load = get_object_or_404(Shipment, pk=pk).delete()
+    object_to_close = Shipment.objects.get(pk=pk)
+    object_to_close.status = closed
+    object_to_close.closed_date = datetime.now
+    object_to_close.save()
 
     return redirect('/cargos')
+
+
+def history(request):
+    loads = Shipment.objects.all().order_by('closed_date').filter(status=closed)[:20]
+    context= {
+        'loads' : loads,
+    }
+    return render(request, 'history_desk.html', context)

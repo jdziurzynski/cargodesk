@@ -20,6 +20,12 @@ currency_choices = (
     (sek,'sek'),
     (pln, 'pln'),
 )
+active = 'active'
+closed = 'closed'
+status_choices = (
+    (active, 'active'),
+    (closed, 'closed'),
+)
 
 class Shipment(models.Model):
     loading_place = models.CharField(max_length=70)
@@ -35,7 +41,17 @@ class Shipment(models.Model):
     currency = models.CharField(max_length=10, choices=currency_choices, default=euro)
     truck_type = models.CharField(max_length=10, choices=truck_type_choices, default=TAUTLINER)
     info = models.TextField(max_length=100, default='')
+    status = models.CharField(max_length=10,  choices=status_choices, default=active)
 
+    closed_date = models.DateField(default=datetime.now)
+
+    @property
+    def date_close(self):
+        date_difference = datetime.now().date() - self.unload_date_to
+        if date_difference.days >= -1:
+            return True
+        else:
+            return False
 
     def title(self):
         ship_title = loading_place
