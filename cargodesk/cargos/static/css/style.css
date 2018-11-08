@@ -40,6 +40,16 @@
       margin-left: 10px;
     }
 
+
+    .history_container {
+      width: 83%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      margin-top: 47px;
+    }
+
+
     .load_block{
       display: flex;
       justify-content: space-between;
@@ -54,6 +64,25 @@
       background-color: #fcc780;
       transform: scale(1.01);
     }
+
+
+    .history_block{
+      display: flex;
+      justify-content: space-between;
+      border: solid 1px;
+      margin: 5px;
+      padding: 3px;
+      border-radius: 2px;
+      border-color: #999492;
+
+    }
+
+    .history_block:hover{
+      background-color: #dbdbdd;
+      transform: scale(1.01);
+    }
+
+
 
     #load_maker{
       position: absolute;

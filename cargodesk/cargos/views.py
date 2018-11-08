@@ -32,14 +32,15 @@ def display_loads(request):
 def delete_load(request, pk):
     object_to_close = Shipment.objects.get(pk=pk)
     object_to_close.status = closed
-    object_to_close.closed_date = datetime.now
+    now = datetime.now
+    object_to_close.closed_date = datetime.now()
     object_to_close.save()
 
     return redirect('/cargos')
 
 
 def history(request):
-    loads = Shipment.objects.all().order_by('closed_date').filter(status=closed)[:20]
+    loads = Shipment.objects.all().order_by('-closed_date').filter(status=closed)[:40]
     context= {
         'loads' : loads,
     }

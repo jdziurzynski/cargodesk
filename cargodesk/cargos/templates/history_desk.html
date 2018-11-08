@@ -15,9 +15,9 @@
       <a href= {% url 'display' %} role='button'><button class='link'>Main</button></a>
     </div>
 
-    <div class='loads_container'>
+    <div class='history_container'>
       {% for load in loads %}
-      <div class='load_block'>
+      <div class='history_block'>
         <div class='fromwhere'>
         <div>{{load.loading_place}}</div>
         <div>{{load.unloading_place}}</div>

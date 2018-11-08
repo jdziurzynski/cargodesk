@@ -43,7 +43,7 @@ class Shipment(models.Model):
     info = models.TextField(max_length=100, default='')
     status = models.CharField(max_length=10,  choices=status_choices, default=active)
 
-    closed_date = models.DateField(default=datetime.now)
+    closed_date = models.DateTimeField(default=datetime.now)
 
     @property
     def date_close(self):
