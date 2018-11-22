@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Shipment, active, closed
 from .forms import FormNewLoad
 from datetime import datetime
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 
 
@@ -40,8 +41,12 @@ def delete_load(request, pk):
 
 
 def history(request):
-    loads = Shipment.objects.all().order_by('-closed_date').filter(status=closed)[:40]
+    loads = Shipment.objects.all().order_by('-closed_date').filter(status=closed)#[:40]
+    paginator = Paginator(loads, 5)
+    page = request.GET.get('page')
+    history_loads = paginator.get_page(page)
     context= {
+        'history_loads' : history_loads,
         'loads' : loads,
     }
     return render(request, 'history_desk.html', context)
