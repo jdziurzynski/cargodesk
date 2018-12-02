@@ -22,7 +22,7 @@ def new_load(request):
     return redirect('/cargos')
 
 
-
+@login_required
 def display_loads(request):
     loads = Shipment.objects.all().order_by('unload_date_to').filter(status=active)
     creat_load = FormNewLoad()
@@ -32,7 +32,7 @@ def display_loads(request):
     }
     return render(request, 'one_desk.html', context)
 
-
+@login_required
 def delete_load(request, pk):
     object_to_close = Shipment.objects.get(pk=pk)
     object_to_close.status = closed
@@ -42,6 +42,7 @@ def delete_load(request, pk):
 
     return redirect('/cargos')
 
+@login_required
 def edit_load(request, pk):
     editing_load = Shipment.objects.get(pk=pk)
     form = FormNewLoad(instance=editing_load)              #jak jest bez request.POST to podaje instancje
@@ -55,6 +56,7 @@ def edit_load(request, pk):
 
     return render(request, 'test.html', context)
 
+@login_required
 def history(request):
     loads = Shipment.objects.all().order_by('-closed_date').filter(status=closed)
     paginator = Paginator(loads, 15)
