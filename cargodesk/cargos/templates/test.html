@@ -15,39 +15,12 @@
   </head>
 
   <body>
-
     <div class='top-bar'>
       <span><strong>CargoDesk</strong></span>
     </div>
     <div class='navi'>
       <a href={% url 'history' %} role='button'><button class='link'>History</button></a>
-      {% if user.is_authenticated %}
-     <span> @{{ user.get_username }}</span>
-     <span><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></span>
-     {% else %}
-      <span><a href="{% url 'login'%}?next={{request.path}}">Login</a></span>
-     {% endif %}
     </div>
-
-    <div class='loads_container'>
-      {% for load in loads %}
-      <div {% if load.date_close %} style="background-color: #FFAEAE" {% endif %} class='load_block'>
-        <div class='fromwhere'>
-        <div>{{load.loading_place}}</div>
-        <div>{{load.unloading_place}}</div>
-      </div>
-        <div>{{load.weight}} t.</div>
-        <div>{{load.price}} {{ load.currency}}</div>
-        <div>{{ load.truck_type }}</div>
-        <div>{{ load.load_date_from|date:"d.m - "  }}{{ load.load_date_to|date:" d.m"}} &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp;&nbsp;
-              {{ load.unload_date_from|date:"d.m -"  }}{{ load.unload_date_to|date:" d.m"}}</div>
-        <div>{{load.info}}</div>
-        <a href="edit/{{ load.pk }}" ><span class="glyphicon glyphicon-pencil"></span></a>
-        <a href="delete/{{ load.pk }}" onclick="return confirm('Przemyśl to');"><span id='delbutton' class="glyphicon glyphicon-trash"></span></a>
-      </div>
-      {% endfor %}
-    </div>
-
 
     <div id="load_maker">
     <form action='{% url 'newload' %}' method="post">
@@ -61,12 +34,6 @@
       <div><label for='{{creat_load.info.label_tag}}'>Info:</label><br>{{ creat_load.info }}</div>
       <br><br><br>
     <input class="submit_button btn-success" type="submit" value="Add load">
-    {% if messages %}
-      {% for message in messages %}
-      <span class="alert alert-success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
-      {% endfor %}
-    </ul>
-  {% endif %}
     </form>
   </div>
 

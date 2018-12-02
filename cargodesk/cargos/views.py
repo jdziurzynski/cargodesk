@@ -4,12 +4,15 @@ from .models import Shipment, active, closed
 from .forms import FormNewLoad
 from datetime import datetime
 from django.core.paginator import  Paginator
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 
+
+@login_required
 def new_load(request):
     creat_load = FormNewLoad(request.POST)
-    print("before")
     if creat_load.is_valid():
         n_load = creat_load.save()
 
@@ -39,10 +42,22 @@ def delete_load(request, pk):
 
     return redirect('/cargos')
 
+def edit_load(request, pk):
+    editing_load = Shipment.objects.get(pk=pk)
+    form = FormNewLoad(instance=editing_load)              #jak jest bez request.POST to podaje instancje
+    if form.is_valid():                                    #jak powinno ale zapisuje jako nowy ładunek
+        form.save()                                        #jak podmienic ladunki poprzez pk????????
+
+    context={
+        'form': form,
+        'editing_load': editing_load,
+    }
+
+    return render(request, 'test.html', context)
 
 def history(request):
     loads = Shipment.objects.all().order_by('-closed_date').filter(status=closed)
-    paginator = Paginator(loads, 2)
+    paginator = Paginator(loads, 15)
     page = request.GET.get('page')
     history_loads = paginator.get_page(page)
     context= {
