@@ -21,6 +21,7 @@
     </div>
     <div class='navi'>
       <a href={% url 'history' %} role='button'><button class='link'>History</button></a>
+      <a href={% url 'todo' %} role='button'><button class='link'>ToDo</button></a>
       {% if user.is_authenticated %}
      <span> @{{ user.get_username }}</span>
      <span><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></span>

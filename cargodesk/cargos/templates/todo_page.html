@@ -1,0 +1,30 @@
+<html>
+  <head>
+    {% load static %}
+    <link rel='stylesheet' type="text/css" href= "{% static 'css/style.css' %}">
+    <title>CargoDesk</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+    @media screen and (max-width: 1400px) {
+      .loads_container {
+        width: 80%;
+      }
+    }
+    </style>
+  </head>
+
+  <body>
+
+    <div class='top-bar'>
+      <span><strong>CargoDesk</strong></span>
+    </div>
+    <div class='navi'>
+      <a href={% url 'history' %} role='button'><button class='link'>History</button></a>
+      {% if user.is_authenticated %}
+     <span> @{{ user.get_username }}</span>
+     <span><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></span>
+     {% else %}
+      <span><a href="{% url 'login'%}?next={{request.path}}">Login</a></span>
+     {% endif %}
+    </div>

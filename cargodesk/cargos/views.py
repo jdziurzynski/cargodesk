@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Shipment, active, closed
-from .forms import FormNewLoad
+from .models import Shipment, active, closed, Todo
+from .forms import FormNewLoad, TodoForm
 from datetime import datetime
 from django.core.paginator import  Paginator
 from django.contrib import messages
@@ -16,10 +16,8 @@ def new_load(request):
     if creat_load.is_valid():
         n_load = creat_load.save()
 
-    context={
-        'creat_load': creat_load,
-    }
     return redirect('/')
+
 
 
 @login_required
@@ -67,3 +65,21 @@ def history(request):
         'loads' : loads,
     }
     return render(request, 'history_desk.html', context)
+
+
+def todo_list(request):
+    todos = Todo.objects.all().order_by('-date')
+    new_post = TodoForm()
+    context = {
+        'todos' : todos,
+        'new_post' : new_post,
+    }
+
+    return render(request, 'todo_page.html', context)
+
+def new_todo(request):
+    new_post = TodoForm(request.POST)
+    if todo_post.is_valid():
+        tpost = todo_post.save()
+
+    return redirect('/todo')

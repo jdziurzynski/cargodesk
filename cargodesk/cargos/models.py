@@ -59,3 +59,8 @@ class Shipment(models.Model):
 
     def  __str__(self):
         return self.loading_place
+
+class Todo(models.Model):
+    title = models.CharField(max_length=30)
+    text = models.TextField(max_length=70)
+    date = models.DateTimeField(default=datetime.now)

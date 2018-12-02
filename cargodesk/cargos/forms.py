@@ -1,5 +1,5 @@
 from django import forms
-from .models import Shipment
+from .models import Shipment, Todo
 from django.forms import ModelForm, Textarea, DateInput, SelectDateWidget, DateField
 from django.contrib.admin import widgets
 
@@ -40,3 +40,11 @@ class FormNewLoad(ModelForm):
         self.fields['unload_date_to'].widget.attrs.update({  'class':'date' })
         #self.fields['date'].widget = widgets.AdminDateWidget()
         self.fields['info'].required = False
+
+class TodoForm(ModelForm):
+    class Meta:
+        model = Todo
+        exclude = ('date',)
+        widgets={
+            'text': Textarea(attrs={'cols':20, 'rows': 3}),
+        }
