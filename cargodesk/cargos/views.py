@@ -19,7 +19,7 @@ def new_load(request):
     context={
         'creat_load': creat_load,
     }
-    return redirect('/cargos')
+    return redirect('/')
 
 
 @login_required
@@ -40,7 +40,7 @@ def delete_load(request, pk):
     object_to_close.closed_date = datetime.now()
     object_to_close.save()
 
-    return redirect('/cargos')
+    return redirect('/')
 
 @login_required
 def edit_load(request, pk):
