@@ -62,12 +62,6 @@
       <div><label for='{{creat_load.info.label_tag}}'>Info:</label><br>{{ creat_load.info }}</div>
       <br><br><br>
     <input class="submit_button btn-success" type="submit" value="Add load">
-    {% if messages %}
-      {% for message in messages %}
-      <span class="alert alert-success" {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</span>
-      {% endfor %}
-    </ul>
-  {% endif %}
     </form>
   </div>
 

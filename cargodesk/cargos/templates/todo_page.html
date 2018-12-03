@@ -6,6 +6,19 @@
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
+
+      .todos_container{
+        margin-top: 400px;
+        margin-right: 100px;
+      }
+
+      #todo_maker {
+        position: absolute;
+        top-margin: 400px;
+        widith: 50%;
+      }
+
+
     @media screen and (max-width: 1400px) {
       .loads_container {
         width: 80%;
@@ -27,4 +40,26 @@
      {% else %}
       <span><a href="{% url 'login'%}?next={{request.path}}">Login</a></span>
      {% endif %}
-    </div>
+     </div>
+
+<div class='todos_container'>
+<div id="todo_maker">
+  <form action='{% url 'newtodo' %}' method="post">
+  {% csrf_token %}
+    <div><label for='{{new_post.title}}'>Title</label><br>{{ new_post.title }}</div>
+    <div><label for='{{new_post.text}}'>Text</label><br>{{ new_post.text }}</div>
+    <input class="submit_button btn-success" type="submit" value="Add">
+  </form>
+</div>
+
+  {% if todo_list %}
+    <ul>
+      {% for todos in todo_list %}
+      <li> {{ todos.title}} </li>
+      <li> {{ todos.text }} </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+</body>
+</html>

@@ -6,9 +6,20 @@ from datetime import datetime
 from django.core.paginator import  Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+class UserToDoList(LoginRequiredMixin, ListView):
+    model = Todo
+    template_name = 'todo_page.html'
 
+    def get_queryset(self):
+        return Todo.objects.filter(author=self.request.user).filter(status=active).order_by('-create_date')
+
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
 
 @login_required
 def new_load(request):
@@ -67,7 +78,7 @@ def history(request):
     return render(request, 'history_desk.html', context)
 
 
-def todo_list(request):
+def todo_list(request): #Not using this
     todos = Todo.objects.all().order_by('-date')
     new_post = TodoForm()
     context = {
@@ -79,7 +90,7 @@ def todo_list(request):
 
 def new_todo(request):
     new_post = TodoForm(request.POST)
-    if todo_post.is_valid():
+    if new_post.is_valid():
         tpost = todo_post.save()
 
     return redirect('/todo')
