@@ -30,6 +30,16 @@ def new_load(request):
     return redirect('/')
 
 
+@login_required
+def edit_save(request, pk):
+    edit_save_object = Shipment.objects.get(pk=pk)
+    creat_load = FormNewLoad(request.POST, instance=edit_save_object)
+    if creat_load.is_valid():
+        n_load = creat_load.save()
+
+    return redirect('/')
+
+
 
 @login_required
 def display_loads(request):
@@ -55,12 +65,13 @@ def delete_load(request, pk):
 def edit_load(request, pk):
     editing_load = Shipment.objects.get(pk=pk)
     form = FormNewLoad(instance=editing_load)              #jak jest bez request.POST to podaje instancje
-    if form.is_valid():                                    #jak powinno ale zapisuje jako nowy ładunek
-        form.save()                                        #jak podmienic ladunki poprzez pk????????
+    # if form.is_valid():                                                 #jak powinno ale zapisuje jako nowy ładunek
+    #     form.save()                                        #jak podmienic ladunki poprzez pk????????
 
     context={
-        'form': form,
+        'creat_load': form,
         'editing_load': editing_load,
+        'current_pk' : pk,
     }
 
     return render(request, 'test.html', context)

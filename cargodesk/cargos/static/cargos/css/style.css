@@ -1,0 +1,141 @@
+
+    .date{
+      width: 90px;
+    }
+
+    select{
+      height: 26px;
+    }
+
+
+    #delbutton{
+      color: black;
+    }
+    #delbutton:hover{
+      color: red;
+    }
+
+    .weight_class{
+      color: : green;
+      width: 35px;
+    }
+    .top-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #95918A;
+      height: 40px;
+      text-align: center;
+      padding: 5px;
+      font-size: 22;
+      font-family: 'Orbitron', sans-serif;
+      color: #FFB600;
+      z-index: 1;
+
+    }
+
+    .loads_container {
+      width: 83%;
+      margin-top: 47px;
+      margin-left: 10px;
+    }
+
+
+    .history_container {
+      width: 83%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      margin-top: 47px;
+    }
+
+
+    .load_block{
+      display: flex;
+      justify-content: space-between;
+      border: solid 1px;
+      margin: 5px;
+      padding: 3px;
+      border-radius: 2px;
+      border-color: #999492;
+    }
+
+    .load_block:hover{
+      background-color: #fcc780;
+      transform: scale(1.01);
+    }
+
+
+    .history_block{
+      display: flex;
+      justify-content: space-between;
+      border: solid 1px;
+      margin: 5px;
+      padding: 3px;
+      border-radius: 2px;
+      border-color: #999492;
+
+    }
+
+    .history_block:hover{
+      background-color: #dbdbdd;
+      transform: scale(1.01);
+    }
+
+
+
+    #load_maker{
+      position: absolute;
+      height: 100%;
+      right: 0px;
+      top: 40px;
+      width: 250px;
+      background: #E8E6E2;
+      display: flex;
+      justify-content: center;
+
+    }
+
+    .submit_button{
+      width: 100%
+
+    }
+
+    .price{
+      display: inline-block;
+      width: 60px;
+    }
+
+    .weight{
+      display:
+      width: 30px;
+    }
+    .fromwhere{
+      display: flex;
+      justify-content: space-between;
+      width: 370px;
+    }
+
+    .navi{
+      position: fixed;
+      align: auto;
+      top: 0px;
+      right: 0px;
+      z-index: 2;
+      font-family: sans-serif;
+    }
+
+    .link{
+      height: 40px;
+      background: #8b8d8e;
+      border: none;
+      font-size: 15px;
+      color: #FFB600;
+
+    }
+
+    @media screen and (max-width: 1400px) {
+      .loads_container {
+        width: 80%;
+      }
+    }

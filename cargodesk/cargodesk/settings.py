@@ -122,4 +122,6 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = "/static/"
+
 LOGIN_REDIRECT_URL = '/cargos'

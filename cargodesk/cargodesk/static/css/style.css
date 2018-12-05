@@ -133,3 +133,9 @@
       color: #FFB600;
 
     }
+
+    @media screen and (max-width: 1400px) {
+      .loads_container {
+        width: 80%;
+      }
+    }
