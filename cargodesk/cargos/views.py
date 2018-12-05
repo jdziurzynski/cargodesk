@@ -10,7 +10,7 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class UserToDoList(LoginRequiredMixin, ListView):
+class UserToDoList(LoginRequiredMixin, ListView): #####NOT IN USE
     model = Todo
     template_name = 'todo_page.html'
 
@@ -88,9 +88,9 @@ def history(request):
     }
     return render(request, 'history_desk.html', context)
 
-
-def todo_list(request): #Not using this
-    todos = Todo.objects.all().order_by('-date')
+@login_required
+def todo_list(request):
+    todos = Todo.objects.filter(author=request.user).filter(status=active).order_by('-create_date')
     new_post = TodoForm()
     context = {
         'todos' : todos,
@@ -99,6 +99,7 @@ def todo_list(request): #Not using this
 
     return render(request, 'todo_page.html', context)
 
+@login_required
 def new_todo(request):
     new_post = TodoForm(request.POST)
     if new_post.is_valid():

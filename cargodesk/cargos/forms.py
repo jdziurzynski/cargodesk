@@ -46,5 +46,9 @@ class TodoForm(ModelForm):
         model = Todo
         exclude = ('date',)
         widgets={
-            'text': Textarea(attrs={'cols':20, 'rows': 3}),
+            'text': Textarea(attrs={'cols':40, 'rows': 3}),
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({ 'class': 'todo_title' })
+        self.fields['text'].widget.attrs.update({ 'class': 'todo_info' })

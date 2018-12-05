@@ -5,13 +5,6 @@
     <title>CargoDesk</title>
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <style>
-    @media screen and (max-width: 1400px) {
-      .loads_container {
-        width: 80%;
-      }
-    }
-    </style>
   </head>
 
   <body>
@@ -19,6 +12,8 @@
       <span><strong>CargoDesk</strong></span>
     </div>
     <div class='navi'>
+      <a href= {% url 'display' %} role='button'><button class='link'>Main</button></a>
+      <a href={% url 'todo' %} role='button'><button class='link'>MyDesk</button></a>
       <a href={% url 'history' %} role='button'><button class='link'>History</button></a>
     </div>
 
