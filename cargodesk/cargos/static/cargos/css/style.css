@@ -138,7 +138,7 @@
         position: fixed;
         left: 0px;
         top: 39px;
-        width: 40%;
+        width: 30%;
         height: 100%;
         background-color: #e8ecf2;
       }
@@ -153,7 +153,6 @@
       border-style: outset;
       display: flex;
       justify-content: center;
-
     }
 
     .todo_list {

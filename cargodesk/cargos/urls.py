@@ -10,5 +10,6 @@ urlpatterns = [
     path('history/', views.history, name='history'),
     path('todo/', views.todo_list, name='todo'),
     path('newtodo/', views.new_todo, name='newtodo'),
+    #path('newtodo/', views.UserToDoList.as_view(), name='newtodoclass'),
     path('accounts/', include('django.contrib.auth.urls'), name='login'),
 ]

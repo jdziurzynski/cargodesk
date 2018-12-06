@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import authenticate
 
 
 class UserToDoList(LoginRequiredMixin, ListView): #####NOT IN USE
@@ -18,7 +19,7 @@ class UserToDoList(LoginRequiredMixin, ListView): #####NOT IN USE
         return Todo.objects.filter(author=self.request.user).filter(status=active).order_by('-create_date')
 
     def form_valid(self, form):
-        form.instance.created_by = self.request.user
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
 @login_required
@@ -93,8 +94,8 @@ def todo_list(request):
     todos = Todo.objects.filter(author=request.user).filter(status=active).order_by('-create_date')
     new_post = TodoForm()
     context = {
-        'todos' : todos,
-        'new_post' : new_post,
+        'todos':todos,
+        'new_post':new_post,
     }
 
     return render(request, 'todo_page.html', context)
@@ -103,6 +104,7 @@ def todo_list(request):
 def new_todo(request):
     new_post = TodoForm(request.POST)
     if new_post.is_valid():
-        tpost = todo_post.save()
+        new_post.author = UserProfile.objects.get(author=request.user)
+        tpost = new_post.save()
 
     return redirect('/todo')

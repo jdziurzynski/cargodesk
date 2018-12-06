@@ -44,7 +44,7 @@ class FormNewLoad(ModelForm):
 class TodoForm(ModelForm):
     class Meta:
         model = Todo
-        exclude = ('date',)
+        exclude = ('create_date', 'status', 'author')
         widgets={
             'text': Textarea(attrs={'cols':40, 'rows': 3}),
         }
