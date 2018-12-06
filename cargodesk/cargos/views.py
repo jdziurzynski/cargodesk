@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 
 
 class UserToDoList(LoginRequiredMixin, ListView): #####NOT IN USE
@@ -104,7 +104,7 @@ def todo_list(request):
 def new_todo(request):
     new_post = TodoForm(request.POST)
     if new_post.is_valid():
-        new_post.author = UserProfile.objects.get(author=request.user)
-        tpost = new_post.save()
+        new_post.author = request.user.username
+        new_post.save()
 
     return redirect('/todo')
