@@ -6,6 +6,7 @@
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+
     <style>
     .todo_block {
       width: 75%;
@@ -33,7 +34,7 @@
         {% csrf_token %}
           <div><label for='{{ new_post.title.label_tag }}'>What To Do?</label><br>{{ new_post.title }}</div><br>
           <div><label for='{{ new_post.text.label_tag }}'>What more?</label><br>{{ new_post.text }}</div><br>
-          <div class='todo_button'><input class="btn btn-warning" type="submit" value="Add to list"></div>
+          <div class='todo_button'><input class="btn btn-success" type="submit" value="Add to list"></div>
         </form>
       </div>
 
@@ -41,7 +42,7 @@
   {% if todos %}
       {% for todo in todos %}
       <div class="todo_block">
-      <div><strong>{{todo.title}}<stong></div>
+      <strong><div>{{todo.title}}</div></strong>
       <div>{{todo.text}}</div>
     </div>
       {% endfor %}

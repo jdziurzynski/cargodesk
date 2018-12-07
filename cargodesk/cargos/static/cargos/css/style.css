@@ -125,6 +125,15 @@
       font-family: sans-serif;
     }
 
+    .loged_user {
+      position: fixed;
+      align: auto;
+      top: 0px;
+      left: 0px;
+      z-index: 2;
+      font-family: sans-serif;
+    }
+
     .link{
       height: 40px;
       background: #8b8d8e;
@@ -157,16 +166,31 @@
 
     .todo_list {
       top: 270px;
-      width: 90%;
+      width: auto;
       display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       }
 
 
     .todo_block {
-      width: 75%;
+      width: auto;
       border: solid 1px;
+      border-radius: 4%;
+      text-align: center;
+      margin: 10px;
+      padding: 5px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      background-color: #c2f9c2;
 
     }
+
+    .todo_block:hover{
+      background-color: #fcc780;
+      transform: scale(1.01);
+    }
+
 
     .todo_title {
       width: 300px;
