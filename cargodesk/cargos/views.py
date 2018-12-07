@@ -104,7 +104,7 @@ def todo_list(request):
 def new_todo(request):
     new_post = TodoForm(request.POST)
     if new_post.is_valid():
-        new_post.author = request.user.username
-        new_post.save()
-
+        n_post=new_post.save(commit=False)
+        n_post.author=request.user
+        n_post.save()
     return redirect('/todo')
