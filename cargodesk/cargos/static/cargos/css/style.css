@@ -236,6 +236,15 @@
       transform: scale(1.01);
     }
 
+    .login_center_block{
+      position: absolute;
+      top: 30%;
+      left: 40%;
+      padding: 15px;
+      border: solid black 1px;
+      background: #e8e8e8;
+    }
+
     @media screen and (max-width: 1400px) {
       .loads_container {
         width: 80%;

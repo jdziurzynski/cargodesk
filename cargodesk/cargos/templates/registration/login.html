@@ -1,5 +1,17 @@
+{% load static %}
+<html>
+  <head>
+    <link rel='stylesheet' href= "{% static 'cargos/css/style.css' %}">
+    <title>CargoDesk</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-
+  </head>
+  <body>
+    <div class='top-bar'>
+      <span><strong>CargoDesk</strong></span>
+    </div>
+<div class='login_center_block'>
 {% block content %}
 
 {% if form.errors %}
@@ -30,11 +42,11 @@
 </tr>
 </table>
 
-<input type="submit" value="login" />
+<input type="submit" value="Login" class="btn btn-success"/>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
+<div>
 {% endblock %}
+</body>
+</html>

@@ -23,7 +23,7 @@
       <div class="todos_maker">
         <form action='{% url 'newtodo' %}' method="post">
         {% csrf_token %}
-          <div><label for='{{ new_post.title.label_tag }}'>What To Do?</label><br>{{ new_post.title }}</div><br>
+          <div><label for='{{ new_post.title.label_tag }}'>What to do?</label><br>{{ new_post.title }}</div><br>
           <div><label for='{{ new_post.text.label_tag }}'>What more?</label><br>{{ new_post.text }}</div><br>
           <div class='todo_button'><input class="btn btn-success" type="submit" value="Add to list"></div>
         </form>

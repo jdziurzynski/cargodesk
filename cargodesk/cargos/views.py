@@ -81,7 +81,7 @@ def edit_load(request, pk):
 
     return render(request, 'edit_load_page.html', context)
 
-
+@login_required
 def copy_load(request, pk):
     loads = Shipment.objects.all().order_by('unload_date_to').filter(status=active)
     copy_load = Shipment.objects.get(pk=pk)
@@ -131,6 +131,7 @@ def new_todo(request):
         n_post.save()
     return redirect('/todo')
 
+@login_required
 def delete_todo(request, pk):
     todo = Todo.objects.get(pk=pk)
     todo.status=closed
@@ -138,7 +139,7 @@ def delete_todo(request, pk):
 
     return  redirect('/todo')
 
-
+@login_required
 def delete_from_mydesk(request, pk):
     load = Shipment.objects.get(pk=pk)
     load.status2=clear
