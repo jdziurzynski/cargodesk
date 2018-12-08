@@ -5,15 +5,6 @@
     <title>CargoDesk</title>
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
-    <style>
-    .todo_block {
-      width: 75%;
-
-    }
-    </style>
-
   </head>
 
   <body>
@@ -44,11 +35,28 @@
       <div class="todo_block">
       <strong><div>{{todo.title}}</div></strong>
       <div>{{todo.text}}</div>
+      <a href="delete_todo/{{ todo.pk }}"><span class="glyphicon glyphicon-ok" id="todo_check_button"></span></a>
     </div>
       {% endfor %}
     {% endif %}
   </div>
   </div>
-</div>
+  <div class="my_loads_container">
+    {% for load in loads %}
+    <div class="my_loads_block">
+      <div class='fromwhere'>
+      <div>{{load.loading_place}}</div>
+      <div>{{load.unloading_place}}</div>
+    </div>
+      <div>{{load.weight}} t.</div>
+      <div>{{load.price}} {{ load.currency}}</div>
+      <div>{{ load.truck_type }}</div>
+      <div>{{ load.load_date_from|date:"d.m - "  }}{{ load.load_date_to|date:" d.m"}} &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp;&nbsp;
+            {{ load.unload_date_from|date:"d.m -"  }}{{ load.unload_date_to|date:" d.m"}}</div>
+      <div>{{load.info}}</div>
+      <a href="delete_from_mydesk/{{ load.pk }}"><span id='delbutton' class="glyphicon glyphicon-ok"></span></a>
+    </div>
+    {% endfor %}
+  </div>
 </body>
 </html>

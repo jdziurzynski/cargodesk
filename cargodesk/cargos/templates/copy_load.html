@@ -5,27 +5,18 @@
     <title>CargoDesk</title>
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
   </head>
 
   <body>
-
     <div class='top-bar'>
       <span><strong>CargoDesk</strong></span>
     </div>
     <div class='navi'>
-        <a href= {% url 'display' %} role='button'><button class='link'>Main</button></a>
-        <a href={% url 'todo' %} role='button'><button class='link'>MyDesk</button></a>
-        <a href={% url 'history' %} role='button'><button class='link'>History</button></a>
-      </div>
-      <div class='loged_user'>
-        {% if user.is_authenticated %}
-         <a href="{% url 'logout'%}?next={{request.path}}"><span class="glyphicon glyphicon-log-out"></span></a>
-         <span class="link"> {{ user.get_username }}</span>
-       {% else %}
-        <span><a href="{% url 'login'%}?next={{request.path}}">Login</a></span>
-       {% endif %}
+      <a href= {% url 'display' %} role='button'><button class='link'>Main</button></a>
+      <a href={% url 'todo' %} role='button'><button class='link'>MyDesk</button></a>
+      <a href={% url 'history' %} role='button'><button class='link'>History</button></a>
     </div>
+
 
     <div class='loads_container'>
       {% for load in loads %}
@@ -41,13 +32,15 @@
               {{ load.unload_date_from|date:"d.m -"  }}{{ load.unload_date_to|date:" d.m"}}</div>
         <div>{{load.info}}</div>
         <div class="load_options">
-          <a href="edit/{{ load.pk }}" ><span id='edit_icon' class="glyphicon glyphicon-pencil"></span></a>
-          <a href="copy/{{ load.pk }}" ><span id='copy_icon' class="glyphicon glyphicon-repeat"></span></a>
-          <a href="delete/{{ load.pk }}" onclick="return confirm('Pewny?');"><span id='delbutton' class="glyphicon glyphicon-ok"></span></a>
+          <span id='edit_icon' class="glyphicon glyphicon-pencil"></span>
+          <span id='copy_icon' class="glyphicon glyphicon-repeat"></span>
+          <span id='delbutton' class="glyphicon glyphicon-ok"></span>
         </div>
       </div>
       {% endfor %}
     </div>
+
+
 
 
     <div id="load_maker">
@@ -61,9 +54,10 @@
       <div><label for='{{creat_load.uload_date_from.label_tag}}'>Unloading dates:</label><br>{{ creat_load.unload_date_from }}{{ creat_load.unload_date_to }}</div>
       <div><label for='{{creat_load.info.label_tag}}'>Info:</label><br>{{ creat_load.info }}</div>
       <br><br><br>
-    <input class="submit_button btn btn-success" type="submit" value="Add load">
+    <input class="btn btn-info submit_button" type="submit" value="Copy load">
     </form>
   </div>
+
 
   </body>
 

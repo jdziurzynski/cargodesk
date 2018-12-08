@@ -8,11 +8,17 @@
     }
 
 
-    #delbutton{
-      color: black;
-    }
+
     #delbutton:hover{
-      color: red;
+      color: #187c0b;
+    }
+
+    #edit_icon:hover{
+      color: white;
+    }
+
+    #copy_icon:hover{
+      color: #41cdfc;
     }
 
     .weight_class{
@@ -35,7 +41,7 @@
     }
 
     .loads_container {
-      width: 83%;
+      width: 84%;
       margin-top: 47px;
       margin-left: 10px;
     }
@@ -158,7 +164,7 @@
       width: 100%;
       height: 230px;
       background: #dee0e2;
-      border-width:2px;
+      border-width: 0px;
       border-style: outset;
       display: flex;
       justify-content: center;
@@ -166,7 +172,7 @@
 
     .todo_list {
       top: 270px;
-      width: auto;
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -175,14 +181,14 @@
 
     .todo_block {
       width: auto;
-      border: solid 1px;
+      border: ;
       border-radius: 4%;
       text-align: center;
       margin: 10px;
-      padding: 5px;
+      padding: 5px 10px 5px 10px;
       overflow-wrap: break-word;
       word-wrap: break-word;
-      background-color: #c2f9c2;
+      background-color: #ccf287;
 
     }
 
@@ -202,6 +208,32 @@
 
     .todo_button {
       text-align: center;
+    }
+
+    #todo_check_button:hover {
+      color: #187c0b;
+    }
+
+    .my_loads_container {
+        position: fixed;
+        width: 69%;
+        margin-top: 47px;
+        right: 5px;
+    }
+
+    .my_loads_block {
+      display: flex;
+      justify-content: space-between;
+      border: solid 1px;
+      margin: 5px;
+      padding: 3px;
+      border-radius: 2px;
+      border-color: #999492;
+    }
+
+    .my_loads_block:hover {
+      background-color: #fcc780;
+      transform: scale(1.01);
     }
 
     @media screen and (max-width: 1400px) {

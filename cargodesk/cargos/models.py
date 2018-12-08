@@ -27,9 +27,16 @@ currency_choices = (
 )
 active = 'active'
 closed = 'closed'
+clear = 'clear'
+in_progres = 'in_progres'
+
 status_choices = (
     (active, 'active'),
     (closed, 'closed'),
+)
+status_choices2 = (
+    (clear, 'clear'),
+    (in_progres, 'in_progres'),
 )
 
 class Shipment(models.Model):
@@ -47,8 +54,11 @@ class Shipment(models.Model):
     truck_type = models.CharField(max_length=10, choices=truck_type_choices, default=TAUTLINER)
     info = models.TextField(max_length=100, default='')
     status = models.CharField(max_length=10,  choices=status_choices, default=active)
+    status2 = models.CharField(max_length=10,  choices=status_choices2, default=clear)
 
     closed_date = models.DateTimeField(default=datetime.now)
+
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, blank=True, null=True)
 
     @property
     def date_close(self):

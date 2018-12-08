@@ -10,6 +10,9 @@ urlpatterns = [
     path('history/', views.history, name='history'),
     path('todo/', views.todo_list, name='todo'),
     path('newtodo/', views.new_todo, name='newtodo'),
-    path('newtodo/', views.UserToDoList.as_view(), name='newtodoclass'),
+    #path('newtodo/', views.UserToDoList.as_view(), name='newtodoclass'),
     path('accounts/', include('django.contrib.auth.urls'), name='login'),
+    path('todo/delete_todo/<pk>', views.delete_todo, name='deletetodo'),
+    path('copy/<pk>', views.copy_load, name='copy'),
+    path('todo/delete_from_mydesk/<pk>', views.delete_from_mydesk, name='deletefrommydesk'),
 ]

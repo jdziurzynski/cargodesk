@@ -17,6 +17,34 @@
       <a href={% url 'history' %} role='button'><button class='link'>History</button></a>
     </div>
 
+
+    <div class='loads_container'>
+      {% for load in loads %}
+      <div {% if load.date_close %} style="background-color: #FFAEAE" {% endif %} class='load_block'>
+        <div class='fromwhere'>
+        <div>{{load.loading_place}}</div>
+        <div>{{load.unloading_place}}</div>
+      </div>
+        <div>{{load.weight}} t.</div>
+        <div>{{load.price}} {{ load.currency}}</div>
+        <div>{{ load.truck_type }}</div>
+        <div>{{ load.load_date_from|date:"d.m - "  }}{{ load.load_date_to|date:" d.m"}} &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>&nbsp;&nbsp;&nbsp;
+              {{ load.unload_date_from|date:"d.m -"  }}{{ load.unload_date_to|date:" d.m"}}</div>
+        <div>{{load.info}}</div>
+        <div class="load_options">
+          <span id='edit_icon' class="glyphicon glyphicon-pencil"></span>
+          <span id='copy_icon' class="glyphicon glyphicon-repeat"></span>
+          <span id='delbutton' class="glyphicon glyphicon-ok"></span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+
+
+
     <div id="load_maker">
     <form action="{% url 'editsave' current_pk %}" method="post">
     {% csrf_token %}
@@ -28,9 +56,10 @@
       <div><label for='{{creat_load.uload_date_from.label_tag}}'>Unloading dates:</label><br>{{ creat_load.unload_date_from }}{{ creat_load.unload_date_to }}</div>
       <div><label for='{{creat_load.info.label_tag}}'>Info:</label><br>{{ creat_load.info }}</div>
       <br><br><br>
-    <input class="submit_button btn-success" type="submit" value="Add load">
+    <input class="btn btn-warning submit_button" type="submit" value="Edit load">
     </form>
   </div>
+
 
   </body>
 

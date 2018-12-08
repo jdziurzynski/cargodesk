@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Shipment, active, closed, Todo
+from .models import Shipment, active, closed, Todo, clear, in_progres
 from .forms import FormNewLoad, TodoForm
 from datetime import datetime
 from django.core.paginator import  Paginator
@@ -26,7 +26,9 @@ class UserToDoList(LoginRequiredMixin, ListView): #####NOT IN USE
 def new_load(request):
     creat_load = FormNewLoad(request.POST)
     if creat_load.is_valid():
-        n_load = creat_load.save()
+        n_load = creat_load.save(commit=False)
+        n_load.author=request.user
+        n_load.save()
 
     return redirect('/')
 
@@ -58,24 +60,42 @@ def delete_load(request, pk):
     object_to_close.status = closed
     now = datetime.now
     object_to_close.closed_date = datetime.now()
+    object_to_close.author = request.user
+    object_to_close.status2 = in_progres
     object_to_close.save()
 
     return redirect('/')
 
 @login_required
 def edit_load(request, pk):
+    loads = Shipment.objects.all().order_by('unload_date_to').filter(status=active)
     editing_load = Shipment.objects.get(pk=pk)
-    form = FormNewLoad(instance=editing_load)              #jak jest bez request.POST to podaje instancje
-    # if form.is_valid():                                                 #jak powinno ale zapisuje jako nowy ładunek
-    #     form.save()                                        #jak podmienic ladunki poprzez pk????????
+    form = FormNewLoad(instance=editing_load)
 
     context={
         'creat_load': form,
         'editing_load': editing_load,
         'current_pk' : pk,
+        'loads': loads,
     }
 
-    return render(request, 'test.html', context)
+    return render(request, 'edit_load_page.html', context)
+
+
+def copy_load(request, pk):
+    loads = Shipment.objects.all().order_by('unload_date_to').filter(status=active)
+    copy_load = Shipment.objects.get(pk=pk)
+    form = FormNewLoad(instance=copy_load)
+    if form.is_valid():
+        form.save()
+
+    context={
+        'copy_load': copy_load,
+        'creat_load' : form,
+        'loads': loads,
+    }
+
+    return render(request, 'copy_load.html', context)
 
 @login_required
 def history(request):
@@ -91,11 +111,13 @@ def history(request):
 
 @login_required
 def todo_list(request):
-    todos = Todo.objects.filter(author=request.user).filter(status=active).order_by('-create_date')
+    todos = Todo.objects.filter(author=request.user).filter(status=active).order_by('create_date')
+    loads = Shipment.objects.filter(author=request.user).filter(status2=in_progres).order_by('-closed_date')
     new_post = TodoForm()
     context = {
         'todos':todos,
         'new_post':new_post,
+        'loads':loads,
     }
 
     return render(request, 'todo_page.html', context)
@@ -107,4 +129,19 @@ def new_todo(request):
         n_post=new_post.save(commit=False)
         n_post.author=request.user
         n_post.save()
+    return redirect('/todo')
+
+def delete_todo(request, pk):
+    todo = Todo.objects.get(pk=pk)
+    todo.status=closed
+    todo.save()
+
+    return  redirect('/todo')
+
+
+def delete_from_mydesk(request, pk):
+    load = Shipment.objects.get(pk=pk)
+    load.status2=clear
+    load.save()
+
     return redirect('/todo')
