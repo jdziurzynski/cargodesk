@@ -102,7 +102,7 @@ def copy_load(request, pk):
 @login_required
 def history(request):
     loads = Shipment.objects.all().order_by('-closed_date').filter(status=closed)
-    paginator = Paginator(loads, 15)
+    paginator = Paginator(loads, 25)
     page = request.GET.get('page')
     history_loads = paginator.get_page(page)
     context= {
@@ -152,5 +152,5 @@ def delete_from_mydesk(request, pk):
 
 def copy_to_cupboard(request, pk):
     load = Shipment.objects.get(pk=pk)
-    pyperclip.copy("Load from  {}  to  {}\n Weight: {}\n Type: {}\n Ready from: {}".format(load.loading_place, load.unloading_place, load.weight, load.truck_type, load.load_date_from ))
+    pyperclip.copy("From:  {}\nTo:  {}\nWeight: {}t.\nType: {}\nReady: {}".format(load.loading_place, load.unloading_place, load.weight, load.truck_type, load.load_date_from ))
     return redirect('/')
