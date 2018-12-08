@@ -10,6 +10,8 @@ from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 
+import pyperclip
+
 
 class UserToDoList(LoginRequiredMixin, ListView): #####NOT IN USE
     model = Todo
@@ -146,3 +148,9 @@ def delete_from_mydesk(request, pk):
     load.save()
 
     return redirect('/todo')
+
+
+def copy_to_cupboard(request, pk):
+    load = Shipment.objects.get(pk=pk)
+    pyperclip.copy("Load from  {}  to  {}\n Weight: {}\n Type: {}\n Ready from: {}".format(load.loading_place, load.unloading_place, load.weight, load.truck_type, load.load_date_from ))
+    return redirect('/')

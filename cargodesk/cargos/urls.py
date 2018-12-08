@@ -15,4 +15,5 @@ urlpatterns = [
     path('todo/delete_todo/<pk>', views.delete_todo, name='deletetodo'),
     path('copy/<pk>', views.copy_load, name='copy'),
     path('todo/delete_from_mydesk/<pk>', views.delete_from_mydesk, name='deletefrommydesk'),
+    path('cupboard/<pk>', views.copy_to_cupboard, name='copytocupboard'),
 ]
