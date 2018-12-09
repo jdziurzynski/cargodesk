@@ -22,7 +22,7 @@ class FormNewLoad(ModelForm):
         #fields =  '__all__'  #'['loading_place', 'unloading_place', 'weight', 'price', 'info', 'truck_type', 'currency', 'date']'
         exclude = ("date_close", "status", "closed_date", 'author', "status2")
         widgets={
-            'info': Textarea(attrs={'cols':20, 'rows': 3}),
+            'info': Textarea(attrs={'cols':20, 'rows': 3, 'style':'resize:none;'}),
             'date': DateInput()
         }
 
@@ -46,7 +46,7 @@ class TodoForm(ModelForm):
         model = Todo
         exclude = ('create_date', 'status', 'author')
         widgets={
-            'text': Textarea(attrs={'cols':40, 'rows': 3}),
+            'text': Textarea(attrs={'cols':40, 'rows': 3, 'style':'resize:none;'}),
         }
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

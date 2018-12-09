@@ -77,7 +77,7 @@ class Shipment(models.Model):
 
 class Todo(models.Model):
     title = models.CharField(max_length=100)
-    text = models.TextField(max_length=200)
+    text = models.TextField(max_length=200, blank=True)
     create_date = models.DateTimeField(default=datetime.now)
     status = models.CharField(max_length=10,  choices=status_choices, default=active)
     author = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, blank=True, null=True)

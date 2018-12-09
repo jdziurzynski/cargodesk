@@ -107,6 +107,13 @@
 
     }
 
+    .cancel_button {
+      position: absolute;
+      right: 35px;
+      top: 580px;
+      width: 180px;
+    }
+
     .price{
       display: inline-block;
       width: 60px;
