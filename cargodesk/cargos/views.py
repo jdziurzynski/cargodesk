@@ -149,7 +149,7 @@ def delete_from_mydesk(request, pk):
 
     return redirect('/todo')
 
-
+@login_required
 def copy_to_cupboard(request, pk):
     load = Shipment.objects.get(pk=pk)
     pyperclip.copy("From:  {}\nTo:  {}\nWeight: {}t.\nType: {}\nReady: {}".format(load.loading_place, load.unloading_place, load.weight, load.truck_type, load.load_date_from ))

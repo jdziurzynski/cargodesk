@@ -5,9 +5,7 @@
     <title>CargoDesk</title>
     <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
   </head>
-
   <body>
 
     <div class='top-bar'>
@@ -29,7 +27,7 @@
 
     <div class='loads_container'>
       {% for load in loads %}
-      <div {% if load.date_close %} style="background-color: #FFAEAE" {% endif %} class='load_block'>
+      <div {% if load.date_close %} style="background-color: #FFAEAE" {% endif %} class='load_block' onClick="style.backgroundColor='white';" ondblclick="style.backgroundColor='#84DFC1';">
         <div class='fromwhere'>
         <div>{{load.loading_place}}</div>
         <div>{{load.unloading_place}}</div>
