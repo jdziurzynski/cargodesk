@@ -1,5 +1,2 @@
-Django==2.2
-djangorestframework
-djoser
-django-filter
+Django==2.1
 pyperclip

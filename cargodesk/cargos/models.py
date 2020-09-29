@@ -39,7 +39,6 @@ status_choices2 = (
     (in_progres, 'in_progres'),
 )
 
-
 class Shipment(models.Model):
     loading_place = models.CharField(max_length=70)
     unloading_place = models.CharField(max_length=70)
